@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         offices.add(new Office("President", "Joe Biden (Democratic Party)"));
-        offices.add(new Office("Vice President", "Kamala Harris"));
+        offices.add(new Office("Vice President", "Kamala Harris (Democratic Party)"));
 
         adapter.notifyDataSetChanged();
     }
