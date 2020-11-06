@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Know Your Government</string>
+    <string name="user_location">User Location</string>
+    <string name="about">About</string>
+    <string name="location_lookup">Location Lookup</string>
+    <string name="office_title">Office Title</string>
+    <string name="official_name">Official Name</string>
+</resources>
