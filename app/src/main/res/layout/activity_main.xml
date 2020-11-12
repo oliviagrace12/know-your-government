@@ -20,7 +20,7 @@
         android:id="@+id/userLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#7C4DFF"
+        android:background="@color/colorUserLocation"
         android:text="@string/user_location"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

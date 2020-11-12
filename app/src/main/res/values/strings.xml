@@ -5,4 +5,11 @@
     <string name="location_lookup">Location Lookup</string>
     <string name="office_title">Office Title</string>
     <string name="official_name">Official Name</string>
+    <string name="democratic_republican_party">(Democratic/Republican Party)</string>
+    <string name="address_label">Address:</string>
+    <string name="sample_address">1234 Sample Address</string>
+    <string name="phone_label">Phone:</string>
+    <string name="sample_phone">(123)456-7890</string>
+    <string name="website_label">Website:</string>
+    <string name="sample_website">www.website.com</string>
 </resources>
