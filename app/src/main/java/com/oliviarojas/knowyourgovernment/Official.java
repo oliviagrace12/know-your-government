@@ -1,6 +1,8 @@
 package com.oliviarojas.knowyourgovernment;
 
-public class Official {
+import java.io.Serializable;
+
+public class Official implements Serializable {
 
     private String name;
     private String title;

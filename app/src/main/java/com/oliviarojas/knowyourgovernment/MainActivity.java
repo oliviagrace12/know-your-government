@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,7 +58,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if (officials.isEmpty()) {
+            return;
+        }
+        int position = recyclerView.getChildLayoutPosition(v);
+        Official official = officials.get(position);
 
+        Intent intent = new Intent(this, OfficialActivity.class);
+        intent.putExtra("Location", location);
+        intent.putExtra("Official", official);
+        startActivity(intent);
     }
 
     @Override

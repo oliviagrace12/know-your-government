@@ -34,7 +34,7 @@ public class OfficeViewAdapter extends RecyclerView.Adapter<OfficeViewHolder> {
     public void onBindViewHolder(@NonNull OfficeViewHolder holder, int position) {
         Official official = offices.get(position);
         holder.officeTitle.setText(official.getTitle());
-        String nameAndParty = official.getName() + " (" + official.getParty() + ")";
+        String nameAndParty = official.getName() + " " + official.getParty();
         holder.officialName.setText(nameAndParty);
     }
 

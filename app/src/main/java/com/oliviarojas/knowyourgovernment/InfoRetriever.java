@@ -88,8 +88,8 @@ public class InfoRetriever implements Runnable {
             official.setName(officialObject.getString("name"));
             JSONObject addressObject = officialObject.getJSONArray("address").getJSONObject(0);
             official.setAddress(getAddress(addressObject));
-            official.setParty(officialObject.optString("party", "Unknown"));
-            official.setPhone(officialObject.has("phone") ? officialObject.getJSONArray("phones").optString(0) : "");
+            official.setParty("(" + (officialObject.optString("party", "Unknown") + ")"));
+            official.setPhone(officialObject.has("phones") ? officialObject.getJSONArray("phones").optString(0) : "");
             official.setUrl(officialObject.has("urls") ? officialObject.getJSONArray("urls").optString(0) : "");
             official.setEmail(officialObject.has("emails") ? officialObject.getJSONArray("emails").optString(0) : "");
             official.setPhotoUrl(officialObject.has("photoUrl") ? officialObject.optString("photoUrl") : "");
