@@ -11,10 +11,10 @@ import java.util.List;
 
 public class OfficeViewAdapter extends RecyclerView.Adapter<OfficeViewHolder> {
 
-    private List<Office> offices;
+    private List<Official> offices;
     private MainActivity mainActivity;
 
-    public OfficeViewAdapter(List<Office> offices, MainActivity mainActivity) {
+    public OfficeViewAdapter(List<Official> offices, MainActivity mainActivity) {
         this.offices = offices;
         this.mainActivity = mainActivity;
     }
@@ -32,9 +32,10 @@ public class OfficeViewAdapter extends RecyclerView.Adapter<OfficeViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull OfficeViewHolder holder, int position) {
-        Office office = offices.get(position);
-        holder.officeTitle.setText(office.getOfficeTitle());
-        holder.officialName.setText(office.getOfficialName());
+        Official official = offices.get(position);
+        holder.officeTitle.setText(official.getTitle());
+        String nameAndParty = official.getName() + " (" + official.getParty() + ")";
+        holder.officialName.setText(nameAndParty);
     }
 
     @Override

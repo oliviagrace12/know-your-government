@@ -1,175 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewOfficial"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundDem">
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/locationOfficial"
+            android:layout_width="864dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/colorBakcground"
+            android:text="@string/user_location"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorBakcground"
-                android:text="@string/user_location"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/nameOfficial"
+            android:layout_width="127dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/official_name"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleOfficial" />
+
+        <TextView
+            android:id="@+id/titleOfficial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/office_title"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationOfficial" />
+
+        <TextView
+            android:id="@+id/partyOfficial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/democratic_republican_party"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/locationOfficial" />
+
+        <ImageView
+            android:id="@+id/officialPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/partyOfficial"
+            app:srcCompat="@drawable/missing" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameOfficial">
 
             <TableRow
-                android:layout_width="729dp"
-                android:layout_height="288dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/col1"
-                    android:layout_width="370dp"
+                <TextView
+                    android:id="@+id/addressLabel"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:text="@string/address_label"
+                    android:textColor="@color/colorWhite" />
 
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/office_title"
-                        android:textAlignment="center"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/official_name"
-                        android:textAlignment="center"
-                        android:textSize="24sp" />
-
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="79dp">
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/addressLabel"
-                                android:layout_width="81dp"
-                                android:layout_height="match_parent"
-                                android:text="@string/address_label"
-                                android:textAlignment="viewStart" />
-
-                            <TextView
-                                android:id="@+id/address"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/sample_address" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/phoneLabel"
-                                android:layout_width="79dp"
-                                android:layout_height="match_parent"
-                                android:text="@string/phone_label" />
-
-                            <TextView
-                                android:id="@+id/phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/sample_phone" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/Website:"
-                                android:layout_width="79dp"
-                                android:layout_height="match_parent"
-                                android:text="@string/website_label" />
-
-                            <TextView
-                                android:id="@+id/website"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/sample_website" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                        </TableRow>
-                    </TableLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/facebook"
-                            android:layout_width="77dp"
-                            android:layout_height="88dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/facebook" />
-
-                        <ImageView
-                            android:id="@+id/twitter"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/twitter" />
-
-                        <ImageView
-                            android:id="@+id/youtube"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/youtube" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/col2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/party"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/democratic_republican_party"
-                        android:textAlignment="center" />
-
-                    <ImageView
-                        android:id="@+id/officialPhoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/missing" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_address"
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
-        </LinearLayout>
-    </ScrollView>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/phoneLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/phone_label"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_phone"
+                    android:textColor="@color/colorWhite" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/websiteLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/website_label"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sample_website"
+                    android:textColor="@color/colorWhite" />
+            </TableRow>
+
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/facebookImage"
+            android:layout_width="95dp"
+            android:layout_height="89dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:srcCompat="@drawable/facebook" />
+
+        <ImageView
+            android:id="@+id/partyImageOfficial"
+            android:layout_width="67dp"
+            android:layout_height="71dp"
+            app:layout_constraintBottom_toBottomOf="@+id/officialPhoto"
+            app:layout_constraintEnd_toEndOf="@+id/officialPhoto"
+            app:srcCompat="@drawable/dem_logo" />
+
+        <ImageView
+            android:id="@+id/twitterImage"
+            android:layout_width="85dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/facebookImage"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/facebookImage"
+            app:srcCompat="@drawable/twitter" />
+
+        <ImageView
+            android:id="@+id/youtubeImage"
+            android:layout_width="71dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/facebookImage"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/facebookImage"
+            app:srcCompat="@drawable/youtube" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

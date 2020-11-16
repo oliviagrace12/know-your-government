@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private OfficeViewAdapter adapter;
     private RecyclerView recyclerView;
-    private List<Office> offices = new ArrayList<>();
+    private List<Official> officials = new ArrayList<>();
+    private String location = "60623";
+    private TextView locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new OfficeViewAdapter(offices, this);
+        adapter = new OfficeViewAdapter(officials, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        locationTextView = findViewById(R.id.userLocation);
+        locationTextView.setText(location);
 
-        offices.add(new Office("President", "Joe Biden (Democratic Party)"));
-        offices.add(new Office("Vice President", "Kamala Harris (Democratic Party)"));
+        new Thread(new InfoRetriever(location, this)).start();
 
         adapter.notifyDataSetChanged();
     }
@@ -60,4 +64,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onLongClick(View v) {
         return true;
     }
+
+    public void setLocation(String location) {
+        this.location = location;
+        locationTextView.setText(location);
+    }
+
+    public void addOfficials(List<Official> newOfficials) {
+        officials.addAll(newOfficials);
+        adapter.notifyDataSetChanged();
+    }
+
 }
