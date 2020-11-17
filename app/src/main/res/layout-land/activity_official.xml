@@ -60,9 +60,10 @@
 
         <ImageView
             android:id="@+id/officialPhoto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="240dp"
+            android:layout_height="247dp"
             android:layout_marginTop="16dp"
+            android:onClick="openPhotoActivity"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -131,8 +132,8 @@
 
                 <TextView
                     android:id="@+id/website"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="141dp"
+                    android:layout_height="match_parent"
                     android:text="@string/sample_website"
                     android:textColor="@color/colorWhite" />
             </TableRow>

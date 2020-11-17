@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.squareup.picasso.Picasso;
 public class OfficialActivity extends AppCompatActivity {
 
     private static final String TAG = "OfficialActivity";
+    private Official official;
+    private String locationString;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,10 +36,11 @@ public class OfficialActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent.hasExtra("Location")) {
-            location.setText(intent.getStringExtra("Location"));
+            locationString = intent.getStringExtra("Location");
+            location.setText(locationString);
         }
         if (intent.hasExtra("Official")) {
-            Official official = (Official) intent.getSerializableExtra("Official");
+            official = (Official) intent.getSerializableExtra("Official");
             title.setText(official.getTitle());
             name.setText(official.getName());
             party.setText(official.getParty());
@@ -64,9 +68,6 @@ public class OfficialActivity extends AppCompatActivity {
     }
 
     private void loadRemoteImage(final String imageURL) {
-        // Needs gradle  implementation 'com.squareup.picasso:picasso:2.71828'
-
-
         final long start = System.currentTimeMillis(); // Used for timing
 
         ImageView imageView = findViewById(R.id.officialPhoto);
@@ -95,6 +96,13 @@ public class OfficialActivity extends AppCompatActivity {
                                 Log.d(TAG, "onError: " + e.getMessage());
                             }
                         });
+    }
+
+    public void openPhotoActivity(View view) {
+        Intent intent = new Intent(this, PhotoActivity.class);
+        intent.putExtra("Location", locationString);
+        intent.putExtra("Official", official);
+        startActivity(intent);
     }
 
 }
