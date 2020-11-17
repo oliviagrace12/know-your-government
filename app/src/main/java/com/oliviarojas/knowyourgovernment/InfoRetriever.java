@@ -23,6 +23,7 @@ public class InfoRetriever implements Runnable {
     private static final String TAG = "InfoRetriever";
     private final String address;
     private final MainActivity mainActivity;
+    private String apiKey = "";
 
     public InfoRetriever(String address, MainActivity mainActivity) {
         this.address = address;
@@ -32,7 +33,7 @@ public class InfoRetriever implements Runnable {
 
     @Override
     public void run() {
-        String urlString = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyANN9ajj-UeeKIU5HYUe4hzoYAxzqvuq4I&address=" + address;
+        String urlString = "https://www.googleapis.com/civicinfo/v2/representatives?key=" + apiKey + "&address=" + address;
 
         HttpURLConnection conn = null;
         StringBuilder stringBuilder = new StringBuilder();

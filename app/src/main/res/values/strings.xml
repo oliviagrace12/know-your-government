@@ -12,4 +12,5 @@
     <string name="sample_phone">(123)456-7890</string>
     <string name="website_label">Website:</string>
     <string name="sample_website">www.website.com</string>
+    <string name="fit_center">Fit Center</string>
 </resources>
