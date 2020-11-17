@@ -170,11 +170,11 @@
             android:layout_height="89dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/fit_center"
+            android:onClick="facebookClicked"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-            app:srcCompat="@drawable/facebook" />
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
         <ImageView
             android:id="@+id/partyImageOfficial"
@@ -191,22 +191,22 @@
             android:layout_width="85dp"
             android:layout_height="66dp"
             android:contentDescription="@string/fit_center"
+            android:onClick="twitterClicked"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/facebookImage"
-            app:srcCompat="@drawable/twitter" />
+            app:layout_constraintTop_toTopOf="@+id/facebookImage" />
 
         <ImageView
             android:id="@+id/youtubeImage"
             android:layout_width="71dp"
             android:layout_height="73dp"
             android:contentDescription="@string/fit_center"
+            android:onClick="youTubeClicked"
             app:layout_constraintBottom_toBottomOf="@+id/facebookImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/facebookImage"
-            app:srcCompat="@drawable/youtube" />
+            app:layout_constraintTop_toTopOf="@+id/facebookImage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

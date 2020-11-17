@@ -1,7 +1,10 @@
 package com.oliviarojas.knowyourgovernment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -57,6 +60,19 @@ public class OfficialActivity extends AppCompatActivity {
             Linkify.addLinks(phone, Linkify.PHONE_NUMBERS);
             Linkify.addLinks(email, Linkify.EMAIL_ADDRESSES);
             Linkify.addLinks(website, Linkify.WEB_URLS);
+
+            if (official.getFacebookId() != null) {
+                ImageView facebookIcon = findViewById(R.id.facebookImage);
+                facebookIcon.setImageResource(R.drawable.facebook);
+            }
+            if (official.getTwitterId() != null) {
+                ImageView twitterIcon = findViewById(R.id.twitterImage);
+                twitterIcon.setImageResource(R.drawable.twitter);
+            }
+            if (official.getYouTubeId() != null) {
+                ImageView youTubeIcon = findViewById(R.id.youtubeImage);
+                youTubeIcon.setImageResource(R.drawable.youtube);
+            }
         }
     }
 
@@ -113,4 +129,62 @@ public class OfficialActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void facebookClicked(View v) {
+        String facebookId = official.getFacebookId();
+        if (facebookId == null) {
+            return;
+        }
+        String FACEBOOK_URL = "https://www.facebook.com/" + facebookId;
+        String urlToUse;
+        PackageManager packageManager = getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                urlToUse = "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            } else { //older versions of fb app
+                urlToUse = "fb://page/" + facebookId;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            urlToUse = FACEBOOK_URL; //normal web url
+        }
+        Intent facebookIntent = new Intent(Intent.ACTION_VIEW);
+        facebookIntent.setData(Uri.parse(urlToUse));
+        startActivity(facebookIntent);
+    }
+
+    public void youTubeClicked(View v) {
+        String name = official.getYouTubeId();
+        if (name == null) {
+            return;
+        }
+        Intent intent = null;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setPackage("com.google.android.youtube");
+            intent.setData(Uri.parse("https://www.youtube.com/" + name));
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.youtube.com/" + name)));
+
+        }
+    }
+
+    public void twitterClicked(View v) {
+        Intent intent = null;
+        String name = official.getTwitterId();
+        if (name == null) {
+            return;
+        }
+        try {
+            // get the Twitter app if possible
+            getPackageManager().getPackageInfo("com.twitter.android", 0);
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?screen_name=" + name));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        } catch (Exception e) {
+            // no Twitter app, revert to browser
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + name));
+        }
+        startActivity(intent);
+    }
 }
