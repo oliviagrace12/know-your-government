@@ -23,7 +23,7 @@ public class InfoRetriever implements Runnable {
     private static final String TAG = "InfoRetriever";
     private final String address;
     private final MainActivity mainActivity;
-    private String apiKey = "AIzaSyANN9ajj-UeeKIU5HYUe4hzoYAxzqvuq4I";
+    private String apiKey = "";
 
     public InfoRetriever(String address, MainActivity mainActivity) {
         this.address = address;
