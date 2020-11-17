@@ -3,6 +3,7 @@ package com.oliviarojas.knowyourgovernment;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ public class OfficialActivity extends AppCompatActivity {
         TextView party = findViewById(R.id.partyOfficial);
         TextView address = findViewById(R.id.address);
         TextView phone = findViewById(R.id.phone);
+        TextView email = findViewById(R.id.email);
         TextView website = findViewById(R.id.website);
 
         Intent intent = getIntent();
@@ -46,9 +48,15 @@ public class OfficialActivity extends AppCompatActivity {
             party.setText(official.getParty());
             address.setText(official.getAddress());
             phone.setText(official.getPhone());
+            email.setText(official.getEmail());
             website.setText(official.getUrl());
             loadRemoteImage(official.getPhotoUrl());
             setPartyDesign(official);
+
+            Linkify.addLinks(address, Linkify.ALL);
+            Linkify.addLinks(phone, Linkify.PHONE_NUMBERS);
+            Linkify.addLinks(email, Linkify.EMAIL_ADDRESSES);
+            Linkify.addLinks(website, Linkify.WEB_URLS);
         }
     }
 

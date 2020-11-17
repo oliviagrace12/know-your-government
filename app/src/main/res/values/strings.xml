@@ -13,4 +13,6 @@
     <string name="website_label">Website:</string>
     <string name="sample_website">www.website.com</string>
     <string name="fit_center">Fit Center</string>
+    <string name="email_label">Email:</string>
+    <string name="sample_email">email@email.com</string>
 </resources>
