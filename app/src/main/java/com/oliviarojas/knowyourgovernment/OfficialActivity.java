@@ -123,6 +123,9 @@ public class OfficialActivity extends AppCompatActivity {
     }
 
     public void openPhotoActivity(View view) {
+        if (official.getPhotoUrl() == null || official.getPhotoUrl().isEmpty()) {
+            return;
+        }
         Intent intent = new Intent(this, PhotoActivity.class);
         intent.putExtra("Location", locationString);
         intent.putExtra("Official", official);
