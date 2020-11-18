@@ -97,12 +97,12 @@ public class OfficialActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.officialPhoto);
 
         if (imageURL.isEmpty()) {
-            Picasso.get().load(R.drawable.missing).into(imageView);
+            imageView.setImageResource(R.drawable.missing);
             return;
         }
 
         Picasso.get().load(imageURL)
-                .error(R.drawable.missing)
+                .error(R.drawable.brokenimage)
                 .placeholder(R.drawable.placeholder)
                 //.into(imageView); // Use this if you don't want a callback
                 .into(imageView,

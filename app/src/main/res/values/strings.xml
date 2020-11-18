@@ -15,4 +15,6 @@
     <string name="fit_center">Fit Center</string>
     <string name="email_label">Email:</string>
     <string name="sample_email">email@email.com</string>
+    <string name="file_name">saved.json</string>
+    <string name="encoding">UTF-8</string>
 </resources>
