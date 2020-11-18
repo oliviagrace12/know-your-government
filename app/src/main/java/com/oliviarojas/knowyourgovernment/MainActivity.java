@@ -2,12 +2,18 @@ package com.oliviarojas.knowyourgovernment;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -34,6 +40,9 @@ import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
 
@@ -43,31 +52,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<Official> officials = new ArrayList<>();
     private String location = "";
     private TextView locationTextView;
+    private static int MY_LOCATION_REQUEST_CODE_ID = 111;
+    private LocationManager locationManager;
+    private Criteria criteria;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!isConnectedToNetwork() && location.isEmpty() && officials.isEmpty()) {
-            showNoNetworkDialogue("New data cannot be retrieved");
-        }
-
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new OfficeViewAdapter(officials, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        loadSavedOfficials();
-
         locationTextView = findViewById(R.id.userLocation);
 
-        locationTextView.setText(location);
-
-        updateLocationData(location);
+        if (!isConnectedToNetwork()) {
+            showNoNetworkDialogue("New data cannot be retrieved");
+            loadSavedOfficialsAndLocation();
+        } else {
+            location = getLocationFromGPS();
+            updateOfficialDataForLocation(location);
+        }
     }
 
-    private void updateLocationData(String location) {
+    private String getLocationFromGPS() {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        criteria = new Criteria();
+
+        // use gps for location
+        criteria.setPowerRequirement(Criteria.POWER_HIGH);
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setSpeedRequired(false);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    },
+                    MY_LOCATION_REQUEST_CODE_ID);
+        } else {
+            return setLocation();
+        }
+        return "";
+    }
+
+    @SuppressLint("MissingPermission")
+    private String setLocation() {
+
+        String bestProvider = locationManager.getBestProvider(criteria, true);
+
+        Location currentLocation = null;
+        if (bestProvider != null) {
+            currentLocation = locationManager.getLastKnownLocation(bestProvider);
+        }
+        if (currentLocation != null) {
+            return String.format(Locale.getDefault(),
+                            "%.4f, %.4f", currentLocation.getLatitude(), currentLocation.getLongitude());
+        } else {
+            return "";
+        }
+
+
+    }
+
+    private void updateOfficialDataForLocation(String location) {
         new Thread(new InfoRetriever(location, this)).start();
         adapter.notifyDataSetChanged();
     }
@@ -101,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setView(view);
         final EditText editText = view.findViewById(R.id.locationEnter);
         builder.setPositiveButton("OK", (dialog, id) -> {
-            updateLocationData(editText.getText().toString());
+            updateOfficialDataForLocation(editText.getText().toString());
         });
         builder.setNegativeButton("CANCEL", (dialog, id) -> {
         });
@@ -204,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writer.close();
     }
 
-    private void loadSavedOfficials() {
+    private void loadSavedOfficialsAndLocation() {
         try {
             InputStream is = getApplicationContext().openFileInput(getString(R.string.file_name));
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
@@ -242,6 +298,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.e(TAG, "loadSavedOfficials: ", e);
         }
         adapter.notifyDataSetChanged();
+
+        locationTextView = findViewById(R.id.userLocation);
+        locationTextView.setText(location);
     }
 
 }

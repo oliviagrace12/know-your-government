@@ -34,6 +34,7 @@ public class InfoRetriever implements Runnable {
     public void run() {
         String urlString = "https://www.googleapis.com/civicinfo/v2/representatives?key=" + apiKey + "&address=" + address;
 
+        Log.i(TAG, "Requesting data using URL: " + urlString);
         HttpURLConnection conn = null;
         StringBuilder stringBuilder = new StringBuilder();
         try {
