@@ -1,6 +1,5 @@
 package com.oliviarojas.knowyourgovernment;
 
-import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -77,7 +76,7 @@ public class InfoRetriever implements Runnable {
 
         mainActivity.runOnUiThread(() -> {
             mainActivity.setLocation(location);
-            mainActivity.addOfficials(officials);
+            mainActivity.updateOfficials(officials);
         });
     }
 
@@ -87,8 +86,10 @@ public class InfoRetriever implements Runnable {
             JSONObject officialObject = officialsArray.getJSONObject(i);
             Official official = new Official();
             official.setName(officialObject.getString("name"));
-            JSONObject addressObject = officialObject.getJSONArray("address").getJSONObject(0);
-            official.setAddress(getAddress(addressObject));
+            if (officialObject.has("address")) {
+                JSONObject addressObject = officialObject.getJSONArray("address").getJSONObject(0);
+                official.setAddress(getAddress(addressObject));
+            }
             official.setParty("(" + (officialObject.optString("party", "Unknown") + ")"));
             official.setPhone(officialObject.has("phones") ? officialObject.getJSONArray("phones").optString(0) : "");
             official.setUrl(officialObject.has("urls") ? officialObject.getJSONArray("urls").optString(0) : "");
