@@ -137,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (R.id.about == item.getItemId()) {
-            Toast.makeText(this, "Clicked on about", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
         } else {
             if (!isConnectedToNetwork()) {
                 showNoNetworkDialogue("Data cannot be retrieved");
